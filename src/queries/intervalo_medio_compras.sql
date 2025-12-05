@@ -4,16 +4,20 @@
 
 with compra_ordenada as (
     select 
-        id_cliente,
-        data_pedido,
-        LAG(data_pedido) over (partition by id_cliente order by data_pedido) as data_anterior
-    from pedidos
+        cod_cliente,
+        nome,
+        dt_pedido,
+        LAG(dt_pedido) over (partition by cod_cliente order by dt_pedido) as data_anterior
+    from pedidos pd
+    join clientes cl
+        on cl.id = pd.cod_cliente
 )
 select
-    id_cliente,
-    AVG(JULIANDAY(data_pedido) - JULIANDAY(data_anterior)) as intervalo_medio_dias,
+    cod_cliente,
+    nome,
+    AVG(JULIANDAY(dt_pedido) - JULIANDAY(data_anterior)) as intervalo_medio_dias,
     COUNT(*) as total_compras_analisadas
 from compra_ordenada
 where data_anterior is not null
-group by id_cliente
+group by cod_cliente
 order by intervalo_medio_dias;

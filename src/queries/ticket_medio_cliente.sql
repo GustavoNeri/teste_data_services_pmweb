@@ -2,11 +2,14 @@
 */
 
 select
-    id_cliente,
-    strftime('%Y', data_pedido) as ano,
-    strftime('%m', data_pedido) as mes,
+    cod_cliente,
+    nome,
+    strftime('%Y', dt_pedido) as ano,
+    strftime('%m', dt_pedido) as mes,
     AVG(valor_total)            as ticket_medio,
     COUNT(*)                    as total_compras
-from pedidos
-group by id_cliente, ano, mes
-order by ano, mes, id_cliente ;
+from pedidos pd
+join clientes cl
+    on cl.id = pd.cod_cliente
+group by cod_cliente, ano, mes
+order by ano, mes, nome, cod_cliente ;

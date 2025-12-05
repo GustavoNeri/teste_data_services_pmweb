@@ -20,7 +20,7 @@ def verificar_tabelas():
         
         for coluna in colunas:
             col_id, col_nome, col_tipo, not_null, default_val, pk = coluna
-            print(f"  {col_id:2d}. {col_nome:25} ({col_type:10}) {'PK' if pk else ''}")
+            print(f"  {col_id:2d}. {col_nome:25} ({col_tipo:10}) {'PK' if pk else ''}")
         
         try:
             cursor.execute(f"SELECT * FROM {nome_tabela} LIMIT 3;")

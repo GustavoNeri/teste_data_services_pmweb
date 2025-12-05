@@ -4,25 +4,25 @@
 
 with vendas_segmento as (
     select
-        departamento,
-        strftime('%Y', data_pedido) as ano,
+        depto,
+        strftime('%Y', dt_pedido) as ano,
         SUM(valor_total)            as total_vendas,
         COUNT(*)                    as qtd_pedidos
     from pedidos
-    where departamento in ('Som', 'Papelaria')
-        and strftime('%Y', data_pedido) in ('2019', '2020')
-    group by departamento, ano
+    where depto in ('Som', 'Papelaria')
+        and strftime('%Y', dt_pedido) in ('2019', '2020')
+    group by depto, ano
 ),
 comparativo as (
     select 
-        departamento,
+        depto,
         ano,
         total_vendas,
-        LAG(total_vendas) over (partition by departamento order by ano) as total_anterior
+        LAG(total_vendas) over (partition by depto order by ano) as total_anterior
     from vendas_segmento
 )
 select 
-    departamento,
+    depto,
     ano,
     total_vendas,
     total_anterior,
@@ -31,4 +31,4 @@ select
         else ROUND(((total_vendas - total_anterior) * 100 / total_anterior), 2)
     end as variacao_percentual
 from comparativo
-order by departamento, ano;
+order by depto, ano;

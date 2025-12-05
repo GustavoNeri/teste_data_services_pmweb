@@ -1,0 +1,30 @@
+
+    ┌─────────────────┐       ┌─────────────────┐
+    │    CLIENTES     │       │     PEDIDOS     │
+    ├─────────────────┤       ├─────────────────┤
+    │ ID (PK)         │1    N │ COD_PEDIDO      │
+    │ EMAIL           │◄─────►│ COD_CLIENTE (FK)│
+    │ NOME            │       │ CODIGO_PRODUTO  │
+    │ DT_NASC         │       │ DEPTO           │
+    │ SEXO            │       │ QUANTIDADE      │
+    | CADASTRO        |       │ VALOR_UNITARIO  │
+    | CIDADE          │       │ QTD_PARCELAS    │
+    │ ESTADO          │       │ DT_PEDIDO       │
+    │ RECEBE_EMAIL    │       │ MEIO_PAGTO      │
+    └─────────────────┘       │ STATUS_PAGAMENTO│
+                              │ VALOR_TOTAL     │
+    ┌─────────────────┐       └─────────────────┘
+    │ LOG_DE_RODADAS  │       
+    ├─────────────────┤       
+    │ ID_RODADA (PK)  │
+    │ DATA_RODADA     │
+    │ TABELA          │
+    │ QTD_INCLUIDO    │
+    │ QTD_ALTERADO    │
+    └─────────────────┘
+    
+    RELACIONAMENTOS:
+    • Um CLIENTE pode ter vários PEDIDOS (1:N)
+    • Cada PEDIDO pertence a um único CLIENTE
+    • LOG_DE_RODADAS registra todas as operações ETL
+    
