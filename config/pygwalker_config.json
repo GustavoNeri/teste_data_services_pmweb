@@ -1,0 +1,11 @@
+{
+  "visSpec": {
+    "width": 1200,
+    "height": 800
+  },
+  "config": {
+    "themeKey": "vega",
+    "theme": "light",
+    "layout": "horizontal"
+  }
+}
