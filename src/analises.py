@@ -46,11 +46,15 @@ def gerar_analises():
     
     # nome_arquivo_query.sql -> nome_arquivo_saida.csv
     queries = {
-        'pedidos_por_semestre.sql': '01_pedidos_por_semestre.csv',
-        'ticket_medio_cliente.sql': '02_ticket_medio_cliente.csv',
-        'intervalo_medio_compras.sql': '03_intervalo_medio_entre_compras.csv',
-        'classificacao_clientes_tiers.sql': '04_classificacao_clientes_tiers.csv',
-        'comparativos_segmentos_2019_2020.sql': '05_comparativos_segmentos_2019_2020.csv'
+        '01_pedidos_por_semestre.sql': '01_pedidos_por_semestre.csv',
+        '02_ticket_medio_cliente.sql': '02_ticket_medio_cliente.csv',
+        '03_intervalo_medio_compras.sql': '03_intervalo_medio_entre_compras.csv',
+        '04_classificacao_clientes_tiers.sql': '04_classificacao_clientes_tiers.csv',
+        '05_comparativos_segmentos_2019_2020.sql': '05_comparativos_segmentos_2019_2020.csv',
+        '06_faixa_etaria_clientes.sql': '06_faixa_etaria_clientes.csv',
+        '07_localizacao_geografica_clientes.sql': '07_localizacao_geografica_clientes.csv',
+        '08_pedidos_por_dia_da_semana.sql': '08_pedidos_por_dia_da_semana.csv',
+        '09_clientes_pagamento_pendente.sql': '09_clientes_pagamento_pendente.csv'
     }
     
     resultados = []
@@ -137,27 +141,44 @@ Data de geração: {pd.Timestamp.now().strftime('%d/%m/%Y %H:%M:%S')}
 5. **Comparativo por Segmento** (`05_comparativos_segmentos_2019_2020.csv`)
    - Variação percentual de vendas entre 2019 e 2020 (Som e Papelaria)
 
+6. **Classificação em Faixa Etária** (`06_faixa_etaria_clientes.csv`)
+   - Comportamento de compra por faixa etária dos clientes
+
+7. **Localização Geográfica** (`07_localizacao_geografica_clientes.csv`)
+   - Analisar as vendas por localização geográfica dos clientes
+
+8. **Sazonalidade por dia da semana** (`08_pedidos_por_dia_da_semana.csv`)
+   - Identificar a sazonalidade de vendas por dia da semana
+
+9. **Clientes com pagamento não confirmado** (`09_clientes_pagamento_pendente.csv`)
+   - Insight para campanhas de remarketing para clientes
+
 ## Tecnologias Utilizadas
 
 - **Linguagem**: Python 3.8+
 - **Banco de Dados**: SQLite
-- **Bibliotecas**: pandas, sqlite3
+- **Bibliotecas**: pandas, sqlite3, pygwalker
 - **Estrutura**: Arquitetura modular com queries SQL separadas
 
 ## Métricas do Projeto
 
-- Queries SQL: 5
+- Queries SQL: 9
 - Tabelas criadas: 3 (CLIENTES, PEDIDOS, LOG_DE_RODADAS)
-- Relatórios gerados: 5 arquivos CSV
+- Relatórios gerados: 9 arquivos CSV
+- Visualização das análises: DASHBOARD interativo com biblioteca pygwalker
 - Logs: Sistema completo de logs
 
 ## Insights
 
 1. **Comportamento de Compra**: Identificar clientes frequentes vs. ocasionais
-2. **Sazonalidade**: Padrões de compra por período do ano
+2. **Sazonalidade por período do ano**: Padrões de compra por período do ano
 3. **Segmentação**: Clientes por valor gasto (tiers)
 4. **Performance**: Evolução das vendas por segmento
 5. **Pagamento**: Análise de preferência por parcelamento
+6. **Faixa Etária**: Comportamento de compra por faixa etária 
+7. **Localização**: Identifica localização geográfica do clientes
+8. **Sazonalidade por dia da semana**: Padrões de compra por dias da semana
+9. **Campanhas de Remarketing**: Classifica clientes com pagamento não confirmado que podem receber e-mails
 """
     
     caminho_relatorio = os.path.join('output', 'relatorios', 'RELATORIO.md')

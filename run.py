@@ -57,7 +57,7 @@ def main():
     print("     - output/relatorios/  - Arquivos CSV com análises")
     print("     - output/der.txt      - Diagrama DER")
     print("\n Próximos passos:")
-    print("     1. Coloque seus CSVs na pasta 'data/'")
+    print("     1. Atualize seus CSVs na pasta 'data/'")
     print("     2. Execute: python3 run.py")
     print("=" * 60)
     print("\n DASHBOARD interativo disponível.")

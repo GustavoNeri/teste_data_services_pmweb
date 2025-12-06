@@ -23,6 +23,10 @@ def gerar_visualizacao():
     print("5. Análise de intervalo médio entre pedidos")
     print("6. Análise de classificação de clientes em tiers")
     print("7. Análise de comparativos de segmentos em 2019 e 2020")
+    print("8. Análise de faixa etária dos clientes")
+    print("9. Análise de localização geográfica dos clientes")
+    print("10. Análise de pedidos por dia da semana")
+    print("11. Análise de clientes com pagamento não aprovado para Remarketing")
 
     opcao = input("\n Opção: ").strip()
 
@@ -47,6 +51,18 @@ def gerar_visualizacao():
     elif opcao == '7':
         df = pd.read_csv('output/relatorios/05_comparativos_segmentos_2019_2020.csv')
         nome_dataset = "Comparativo Segmentos"
+    elif opcao == '8':
+        df = pd.read_csv('output/relatorios/06_faixa_etaria_clientes.csv')
+        nome_dataset = "Faixa Etária"
+    elif opcao == '9':
+        df = pd.read_csv('output/relatorios/07_localizacao_geografica_clientes.csv')
+        nome_dataset = "Localização Geográfica"
+    elif opcao == '10':
+        df = pd.read_csv('output/relatorios/08_pedidos_por_dia_da_semana.csv')
+        nome_dataset = "Pedidos por Dia da Semana"
+    elif opcao == '11':
+        df = pd.read_csv('output/relatorios/09_clientes_pagamento_pendente.csv')
+        nome_dataset = "Pagamentos Não Confirmados - Remarketing"
     else:
         df = pd.read_sql_query("SELECT * FROM PEDIDOS", conn)
         nome_dataset = "Pedidos"
