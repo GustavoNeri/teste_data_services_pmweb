@@ -60,7 +60,6 @@ def gerar_analises():
     
     conn.close()
     
-    # Resumo
     print("\n Resumo das análises geradas:")
     print("=" * 60)
     for query, sucesso in resultados:
@@ -74,28 +73,28 @@ def criar_der():
     print("=" * 60)
     
     der = """
-    ┌─────────────────┐       ┌─────────────────┐
-    │    CLIENTES     │       │     PEDIDOS     │
-    ├─────────────────┤       ├─────────────────┤
-    │ ID (PK)         │1    N │ COD_PEDIDO      │
-    │ EMAIL           │◄─────►│ COD_CLIENTE (FK)│
-    │ NOME            │       │ CODIGO_PRODUTO  │
-    │ DT_NASC         │       │ DEPTO           │
-    │ SEXO            │       │ QUANTIDADE      │
-    | CADASTRO        |       │ VALOR_UNITARIO  │
-    | CIDADE          │       │ QTD_PARCELAS    │
-    │ ESTADO          │       │ DT_PEDIDO       │
-    │ RECEBE_EMAIL    │       │ MEIO_PAGTO      │
-    └─────────────────┘       │ STATUS_PAGAMENTO│
-                              │ VALOR_TOTAL     │
-    ┌─────────────────┐       └─────────────────┘
+    ┌────────────────────────┐       ┌──────────────────┐
+    │    CLIENTES            │       │     PEDIDOS      │
+    ├────────────────────────┤       ├──────────────────┤
+    │ ID (PK)                │1    N │ ID_PEDIDO        │
+    │ EMAIL                  │◄─────►│ ID_CLIENTE (FK)  │
+    │ NOME                   │       │ ID_PRODUTO       │
+    │ DATA_NASCIMENTO        │       │ DEPARTAMENTO     │
+    | CIDADE                 │       │ QUANTIDADE       │
+    │ UF                     │       │ VALOR_UNITARIO   │
+    │ PERMISSAO_RECEBE_EMAIL │       │ PARCELAS         │
+    └────────────────────────┘       │ DATA_PEDIDO      │
+                                     │ MEIO_PAGAMENTO   │
+                                     │ STATUS_PAGAMENTO │
+                                     │ VALOR_TOTAL      │
+    ┌─────────────────┐              └──────────────────┘
     │ LOG_DE_RODADAS  │       
     ├─────────────────┤       
     │ ID_RODADA (PK)  │
     │ DATA_RODADA     │
     │ TABELA          │
-    │ QTD_INCLUIDO    │
     │ QTD_ALTERADO    │
+    │ QTD_INCLUIDO    │
     └─────────────────┘
     
     RELACIONAMENTOS:

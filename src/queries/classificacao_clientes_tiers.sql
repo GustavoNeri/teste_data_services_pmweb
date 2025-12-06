@@ -4,18 +4,18 @@
 
 with valor_mensal as (
     select
-        cod_cliente,
+        id_cliente,
         nome,
-        strftime('%Y', dt_pedido) as ano,
-        strftime('%m', dt_pedido) as mes,
-        SUM(valor_total)            as valor_total
+        strftime('%Y', data_pedido) as ano,
+        strftime('%m', data_pedido) as mes,
+        SUM(valor_total)          as valor_total
     from pedidos pd
     join clientes cl
-        on cl.id = pd.cod_cliente
-    group by cod_cliente, ano, mes
+        on cl.id = pd.id_cliente
+    group by id_cliente, ano, mes
 )
 select 
-    cod_cliente,
+    id_cliente,
     nome,
     ano,
     mes,
@@ -27,4 +27,4 @@ select
         else 'Super'
     end as tier
 from valor_mensal
-order by ano, mes, nome, cod_cliente ;
+order by ano, mes, nome, id_cliente ;

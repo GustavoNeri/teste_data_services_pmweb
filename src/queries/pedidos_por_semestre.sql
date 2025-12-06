@@ -2,17 +2,17 @@
 */
 
 select
-    cod_cliente,
+    id_cliente,
     nome,
-    strftime('%Y', dt_pedido) as ano,
+    strftime('%Y', data_pedido) as ano,
     case 
-        when cast(strftime('%m', dt_pedido) as integer) <= 6 then 1
+        when cast(strftime('%m', data_pedido) as integer) <= 6 then 1
         else 2
     end         as semestre,
     COUNT(*)    as qtd_pedidos
 from pedidos pd
 join clientes cl
-    on cl.id = pd.cod_cliente
-where qtd_parcelas > 1
-group by cod_cliente, ano, semestre
-order by ano, semestre, nome, cod_cliente;
+    on cl.id = pd.id_cliente
+where parcelas > 1
+group by id_cliente, ano, semestre
+order by ano, semestre, nome, id_cliente;

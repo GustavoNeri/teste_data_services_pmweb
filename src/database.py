@@ -6,32 +6,32 @@ def criar_banco():
     conn = sqlite3.connect('projeto.db')
     
     # Tabela CLIENTES
+    conn.execute('DROP TABLE IF EXISTS CLIENTES')
     conn.execute('''
-    CREATE TABLE IF NOT EXISTS CLIENTES (
+    CREATE TABLE CLIENTES (
         ID INTEGER PRIMARY KEY,
         EMAIL TEXT,
         NOME TEXT,
-        DT_NASC TEXT,
-        SEXO TEXT,
-        CADASTRO TEXT,
+        DATA_NASCIMENTO TEXT,
         CIDADE TEXT,
-        ESTADO TEXT,
-        RECEBE_EMAIL INTEGER
+        UF TEXT,
+        PERMISSAO_RECEBE_EMAIL INTEGER
     )
     ''')
     
     # Tabela PEDIDOS
+    conn.execute('DROP TABLE IF EXISTS PEDIDOS')
     conn.execute('''
-    CREATE TABLE IF NOT EXISTS PEDIDOS (
-        COD_PEDIDO INTEGER,
-        COD_CLIENTE INTEGER,
-        CODIGO_PRODUTO INTEGER,
-        DEPTO TEXT,
+    CREATE TABLE PEDIDOS (
+        ID_PEDIDO INTEGER,
+        ID_CLIENTE INTEGER,
+        ID_PRODUTO INTEGER,
+        DEPARTAMENTO TEXT,
         QUANTIDADE INTEGER,
         VALOR_UNITARIO REAL,
-        QTD_PARCELAS INTEGER,
-        DT_PEDIDO TEXT,
-        MEIO_PAGTO TEXT,
+        PARCELAS INTEGER,
+        DATA_PEDIDO TEXT,
+        MEIO_PAGAMENTO TEXT,
         STATUS_PAGAMENTO TEXT,
         VALOR_TOTAL REAL,
         FOREIGN KEY (ID_CLIENTE) REFERENCES CLIENTES(ID)
@@ -39,13 +39,14 @@ def criar_banco():
     ''')
     
     # Tabela LOG_DE_RODADAS
+    conn.execute('DROP TABLE IF EXISTS LOG_DE_RODADAS')
     conn.execute('''
-    CREATE TABLE IF NOT EXISTS LOG_DE_RODADAS (
+    CREATE TABLE LOG_DE_RODADAS (
         ID_RODADA INTEGER PRIMARY KEY AUTOINCREMENT,
         DATA_RODADA TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         TABELA TEXT,
-        QTD_INCLUIDO INTEGER,
-        QTD_ALTERADO INTEGER DEFAULT 0
+        QTD_ALTERADO INTEGER DEFAULT 0,
+        QTD_INCLUIDO INTEGER
     )
     ''')
     
@@ -55,3 +56,19 @@ def criar_banco():
 
 def get_connection():
     return sqlite3.connect('projeto.db')
+
+def resetar_banco():
+    print("=" * 60)
+    print("Reset do banco de dados")
+    print("=" * 60)
+
+    if os.path.exists('projeto.db'):
+        os.remove('projeto.db')
+        print("Arquivo projeto.db removido")
+    
+    criar_banco()
+    
+    verificar_estrutura()
+
+if __name__ == "__main__":
+    resetar_banco()
