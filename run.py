@@ -8,15 +8,15 @@ def criar_diretorios():
     dirs = ['data', 'src', 'output', 'output/logs', 'output/relatorios']
     for dir_name in dirs:
         os.makedirs(dir_name, exist_ok=True)
-    print("Diretórios criados.")
+    print("\n Diretórios criados.")
 
 def instalar_dependencias():
-    print("Instalando dependências.")
+    print("\n Instalando dependências.")
     try:
         subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", "requirements.txt"])
-        print("Dependências instaladas")
+        print("\n Dependências instaladas")
     except:
-        print("Erro na instalação. Verifique se requirements.txt existe")
+        print("\n Erro na instalação. Verifique se requirements.txt existe")
 
 def main():
     print("=" * 60)
@@ -29,31 +29,41 @@ def main():
     if resposta.lower() == 's':
         instalar_dependencias()
     
+    # Executa ETL
     print("\n" + "=" * 60)
     print("Etapa 1: Executando ETL")
     print("=" * 60)
     from src.etl import executar_etl
     executar_etl()
     
-    # Executar análises
+    # Executa análises e cria o DER
     print("\n" + "=" * 60)
     print("Etapa 2: Gerando Análises")
     print("=" * 60)
     from src.analises import gerar_analises, criar_der
     gerar_analises()
     criar_der()
+
+    # Cria DASHBOARD pygwalker
+    print("\n" + "=" * 60)
+    print("Etapa 3: Gerando Visualizações")
+    print("=" * 60)
+    from src.visualizacao import gerar_visualizacao
+    gerar_visualizacao()
     
     print("\n" + "=" * 60)
-    print("Projeto executado com sucesso.")
-    print("=" * 60)
     print("\n Estrutura Gerada:")
     print("     - projeto.db          - Banco de dados SQLite")
     print("     - output/relatorios/  - Arquivos CSV com análises")
     print("     - output/der.txt      - Diagrama DER")
     print("\n Próximos passos:")
     print("     1. Coloque seus CSVs na pasta 'data/'")
-    print("     2. Execute: python run.py")
-    print("     3. Consulte os resultados na pasta 'output/'")
+    print("     2. Execute: python3 run.py")
+    print("=" * 60)
+    print("\n DASHBOARD interativo disponível.")
+    print("\n" + "=" * 60)
+    print("\n Projeto executado com sucesso.")
+    print("\n" + "=" * 60)
 
 if __name__ == "__main__":
     main()
